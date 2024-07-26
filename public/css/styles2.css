@@ -1,0 +1,94 @@
+/* styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+  font-family: "Montserrat", sans-serif;
+
+}
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(45deg, #e1228b, #e497c1 , #f4dded);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background-attachment: fixed;
+  }
+  
+  .container {
+    max-width: 400px;
+    width: 100%;
+    /* background-color: #a14b4b; */
+    background: linear-gradient(to right , rgb(230, 233, 224) , white);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 2rem;
+  }
+  
+  .form-group label {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .form-control {
+    border-radius: 25px;
+    box-shadow: none;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+    padding: 10px 15px;
+  }
+  
+  .form-control:focus {
+    border-color: #ff9296;
+    box-shadow: 0 0 7px rgba(255, 154, 158, 0.64);
+  }
+  
+  .btn-primary {
+    color: rgb(109, 109, 109);
+    width: 100%;
+    padding: 10px;
+    border-radius: 25px;
+    background-color: #d663a2;
+    border-color: #d663a2;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+  }
+  
+  .btn-primary:hover {
+    background-color: #89074f;
+    border-color: rgb(251, 174, 174);
+  }
+  
+  .toastr {
+    font-size: 1rem;
+  }
+  
+  .registered-user{
+    margin-top: 7px;
+    text-decoration: none;
+    color: #550404;
+  }
+
+  .banner-tagline{
+    font-size: 2.4rem;
+    color: rgb(142, 142, 142);
+  }
+  
+  @media(max-width : 768px){
+    .banner-tagline{
+      font-size: 1rem;
+      color: blue;
+    }
+  }
+  .banner-description{
+    font-size: 0.79rem;
+    color: rgb(255, 234, 0);
+  }

@@ -1,0 +1,327 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload File</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Upload PDF</h2>
+    <form action="/<%=category%>/upload" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="file">Choose PDF file:</label>
+        <input type="file" class="form-control-file" id="file" name="file" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+  </div>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload File</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    body {
+      background: linear-gradient(to right, #d32e91, #00f2fe);
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 40px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+    }
+    h2 {
+      font-weight: 700;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      background: linear-gradient(45deg, #ffe4e1, #f0e68c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+    }
+    .form-group {
+      position: relative;
+      margin-bottom: 20px;
+      padding: 20px;
+      border: 2px dashed rgba(255, 255, 255, 0.5);
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    .form-group.dragover {
+      border-color: #00f2fe;
+    }
+    .form-group input[type="file"] {
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      cursor: pointer;
+    }
+    .form-group label {
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+    .form-group .file-label {
+      font-size: 1rem;
+      color: #fff;
+    }
+    .btn-primary {
+      background-color: #28a745;
+      border-color: #28a745;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+    .btn-primary:hover {
+      background-color: #218838;
+      border-color: #1e7e34;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Upload PDF</h2>
+    <form action="/<%= category %>/upload" method="POST" enctype="multipart/form-data" id="uploadForm">
+      <div class="form-group" id="dropZone">
+        <label for="file">Choose or drag a PDF file here:</label>
+        <input type="file" class="form-control-file" id="file" name="file" required>
+        <span class="file-label">No file chosen</span>
+      </div>
+      <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+  </div>
+
+  <script>
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('file');
+    const fileLabel = document.querySelector('.file-label');
+
+    // Update the file label when a file is selected
+    fileInput.addEventListener('change', (event) => {
+      const files = event.target.files;
+      if (files.length > 0) {
+        fileLabel.textContent = files[0].name;
+      } else {
+        fileLabel.textContent = 'No file chosen';
+      }
+    });
+
+    // Drag and drop functionality
+    dropZone.addEventListener('dragover', (event) => {
+      event.preventDefault();
+      dropZone.classList.add('dragover');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('dragover');
+    });
+
+    dropZone.addEventListener('drop', (event) => {
+      event.preventDefault();
+      dropZone.classList.remove('dragover');
+      const files = event.dataTransfer.files;
+      if (files.length > 0) {
+        fileInput.files = files;
+        fileLabel.textContent = files[0].name;
+      }
+    });
+  </script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload File</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    body {
+      background: linear-gradient(to right, #d32e91, #00f2fe);
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 40px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+    }
+    h2 {
+      font-weight: 700;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      background: linear-gradient(45deg, #ffe4e1, #f0e68c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+    }
+    .form-group {
+      position: relative;
+      margin-bottom: 20px;
+      padding: 20px;
+      border: 2px dashed rgba(255, 255, 255, 0.5);
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    .form-group.dragover {
+      border-color: #00f2fe;
+    }
+    .form-group input[type="file"] {
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      cursor: pointer;
+    }
+    .form-group label {
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+    .form-group .file-label {
+      font-size: 1rem;
+      color: #fff;
+    }
+    .btn-primary, .btn-secondary {
+      transition: background-color 0.3s, border-color 0.3s;
+      margin: 5px;
+    }
+    .btn-primary {
+      background-color: #28a745;
+      border-color: #28a745;
+    }
+    .btn-primary:hover {
+      background-color: #218838;
+      border-color: #1e7e34;
+    }
+    .btn-secondary {
+      background-color: #447fb3;
+      border-color: #4c82b1;
+    }
+    .btn-secondary:hover {
+      background-color: #5a6268;
+      border-color: #545b62;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Upload PDF</h2>
+    <form action="/<%= category %>/upload" method="POST" enctype="multipart/form-data" id="uploadForm">
+      <div class="form-group" id="dropZone">
+        <label for="file">Choose or drag a PDF file here:</label>
+        <input type="file" class="form-control-file" id="file" name="file" required>
+        <span class="file-label">No file chosen</span>
+      </div>
+      <button type="submit" class="btn btn-primary">Upload</button>
+      <button type="button" class="btn btn-secondary" onclick="goBack()">Back</button>
+    </form>
+  </div>
+
+  <script>
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('file');
+    const fileLabel = document.querySelector('.file-label');
+
+    // Update the file label when a file is selected
+    fileInput.addEventListener('change', (event) => {
+      const files = event.target.files;
+      if (files.length > 0) {
+        fileLabel.textContent = files[0].name;
+      } else {
+        fileLabel.textContent = 'No file chosen';
+      }
+    });
+
+    // Drag and drop functionality
+    dropZone.addEventListener('dragover', (event) => {
+      event.preventDefault();
+      dropZone.classList.add('dragover');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('dragover');
+    });
+
+    dropZone.addEventListener('drop', (event) => {
+      event.preventDefault();
+      dropZone.classList.remove('dragover');
+      const files = event.dataTransfer.files;
+      if (files.length > 0) {
+        fileInput.files = files;
+        fileLabel.textContent = files[0].name;
+      }
+    });
+
+    // Go back to the previous page
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</body>
+</html>

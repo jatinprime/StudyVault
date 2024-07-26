@@ -1,0 +1,113 @@
+<!-- views/partials/navbar.ejs
+<nav class="navbar navbar-expand-lg navbar-light " style="padding-right: 50px; background: rgba(255, 255, 255, 0.438); border: 2px solid gray; border-radius: 6px; position: fixed; top: 0px; left: 0px; right: 0px;">
+    <a class="navbar-brand" href="/" style="font-weight: bold; font-size: 1.5em; margin-left: 91px;">
+        <img src="images/logo.png" alt="logo" style="height: 60px; margin-right: 10px;">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto extra-class" >
+        <% if (!currentUser) { %>
+          <li class="nav-item">
+            <a class="btn btn-outline-primary" href="/login">Login</a>
+          </li>
+        <% } else { %>
+          <li class="nav-item">
+            <a class="btn btn-outline-danger" href="/logout">Logout</a>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+  </nav>
+   -->
+<!-- views/partials/navbar.ejs -->
+<!-- views/partials/navbar.ejs -->
+<nav class="custom-navbar" style="padding: 10px 50px; background: rgba(255, 255, 255, 0.99); border: 2px solid gray; border-radius: 6px; position: fixed; top: 0; left: 0; right: 0; transition: all 0.3s ease; z-index: 1000; display: flex; align-items: center; justify-content: space-between;">
+  <a class="custom-navbar-brand" href="/" style="font-weight: bold; font-size: 1.5em; display: flex; align-items: center; color: white;">
+      <img src="images/logo.png" alt="logo" style="height: 60px; margin-right: 10px; transition: height 0.3s ease;">
+      <span style="color: #007bff;">Student Files</span>
+  </a>
+  <button class="custom-navbar-toggler" type="button" style="border: none; background: none; display: none;" onclick="toggleCustomNavbar()">
+      <span class="custom-navbar-toggler-icon" style="font-size: 1.5em; color: white;">&#9776;</span>
+  </button>
+  <div class="custom-navbar-collapse" id="customNavbarNav" style="display: flex; flex-grow: 0; margin-left: auto;">
+      <ul class="custom-navbar-nav" style="display: flex; list-style: none; padding: 0; margin: 0;">
+          <% if (!currentUser) { %>
+              <li class="custom-nav-item" style="margin-left: 10px;">
+                  <a class="custom-btn custom-btn-outline-primary" href="/login" style="padding: 8px 20px; text-decoration: none; border: 1px solid #007bff; border-radius: 4px; color: #fff; background-color: #007bff; transition: background-color 0.3s ease, color 0.3s ease;">
+                      Login
+                  </a>
+              </li>
+          <% } else { %>
+              <li class="custom-nav-item" style="margin-left: 10px;">
+                  <a class="custom-btn custom-btn-outline-danger" href="/logout" style="padding: 8px 20px; text-decoration: none; border: 1px solid #dc3545; border-radius: 4px; color: #fff; background-color: #dc3545; transition: background-color 0.3s ease, color 0.3s ease;">
+                      Logout
+                  </a>
+              </li>
+          <% } %>
+      </ul>
+  </div>
+</nav>
+
+<script>
+  window.onscroll = function() {
+      var navbar = document.querySelector('.custom-navbar');
+      var logo = document.querySelector('.custom-navbar-brand img');
+      if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+          navbar.style.padding = '5px 50px';
+          logo.style.height = '40px';
+      } else {
+          navbar.style.padding = '10px 50px';
+          logo.style.height = '60px';
+      }
+  };
+
+  function toggleCustomNavbar() {
+      var navbarNav = document.getElementById('customNavbarNav');
+      if (navbarNav.style.display === 'flex') {
+          navbarNav.style.display = 'none';
+      } else {
+          navbarNav.style.display = 'flex';
+          navbarNav.style.flexDirection = 'column';
+      }
+  }
+
+  window.addEventListener('resize', function() {
+      var navbarNav = document.getElementById('customNavbarNav');
+      var navbarToggler = document.querySelector('.custom-navbar-toggler');
+      if (window.innerWidth <= 768) {
+          navbarToggler.style.display = 'block';
+          navbarNav.style.display = 'none';
+      } else {
+          navbarToggler.style.display = 'none';
+          navbarNav.style.display = 'flex';
+          navbarNav.style.flexDirection = 'row';
+      }
+  });
+
+  window.dispatchEvent(new Event('resize'));
+
+  // Add hover effects for buttons
+  var loginBtn = document.querySelector('.custom-btn-outline-primary');
+  var logoutBtn = document.querySelector('.custom-btn-outline-danger');
+  
+  loginBtn.addEventListener('mouseover', function() {
+      loginBtn.style.backgroundColor = '#0056b3';
+      loginBtn.style.borderColor = '#0056b3';
+  });
+  loginBtn.addEventListener('mouseout', function() {
+      loginBtn.style.backgroundColor = '#007bff';
+      loginBtn.style.borderColor = '#007bff';
+  });
+
+  logoutBtn.addEventListener('mouseover', function() {
+      logoutBtn.style.backgroundColor = '#c82333';
+      logoutBtn.style.borderColor = '#c82333';
+  });
+  logoutBtn.addEventListener('mouseout', function() {
+      logoutBtn.style.backgroundColor = '#dc3545';
+      logoutBtn.style.borderColor = '#dc3545';
+  });
+</script>
+

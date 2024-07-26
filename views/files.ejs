@@ -1,0 +1,1398 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Files</title>
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+</head>
+<body>
+  <div class="container">
+    <h2>Your Uploaded Files</h2>
+    <a href="/files/upload" class="btn btn-primary mb-3">Upload New File</a>
+    <a href="/logout" class="btn btn-secondary mb-3">Logout</a>
+    <ul class="list-group">
+      <% if (files.length === 0) { %>
+        <li class="list-group-item text-danger">No files available</li>
+      <% } else { %>
+        <% files.forEach(function(file) { %>
+          <li class="list-group-item">
+            <a href="/<%= file.filepath %>" download><%= file.filename %></a>
+            <form action="/files/delete/<%= file._id %>?_method=DELETE" method="POST" style="display: inline;">
+              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+          </li>
+        <% }) %>
+      <% } %>
+    </ul>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script>
+    const errorMessage = "<%= typeof error !== 'undefined' && error ? error : '' %>";
+    if (errorMessage) {
+      toastr.error(errorMessage);
+    }
+    const successMessage = "<%= typeof success !== 'undefined' && success ? success : '' %>";
+    if (successMessage) {
+      toastr.success(successMessage);
+    }
+
+  </script>
+</body>
+</html> -->
+
+<!-- 
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Files</title>
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+  <style>
+    /* Add any additional custom styles here */
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Your Uploaded Files</h2>
+    <a href="/<%= category %>/upload" class="btn btn-primary mb-3">Upload New File</a>
+    <a href="/logout" class="btn btn-secondary mb-3">Logout</a>
+    <ul class="list-group">
+      <% if (files.length === 0) { %>
+        <li class="list-group-item text-danger">No files available</li>
+      <% } else { %>
+        <% files.forEach(function(file) { %>
+          <li class="list-group-item">
+            <a href="/uploads/<%= file.filename %>" download><%= file.filename %></a>
+            <form action="/<%= category %>/delete/<%= file._id %>?_method=DELETE" method="POST" style="display: inline;">
+              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+          </li>
+        <% }) %>
+      <% } %>
+    </ul>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script>
+    const errorMessage = "<%= typeof error !== 'undefined' && error ? error : '' %>";
+    if (errorMessage) {
+      toastr.error(errorMessage);
+    }
+    const successMessage = "<%= typeof success !== 'undefined' && success ? success : '' %>";
+    if (successMessage) {
+      toastr.success(successMessage);
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+-->
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Files</title>
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+  <style>
+    body {
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding-top: 20px;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+    .btn-primary:hover {
+      background-color: #0056b3;
+      border-color: #004494;
+    }
+    .btn-secondary {
+      background-color: #6c757d;
+      border-color: #6c757d;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+    .btn-secondary:hover {
+      background-color: #5a6268;
+      border-color: #545b62;
+    }
+    .list-group-item {
+      background-color: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s;
+    }
+    .list-group-item:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+    .text-danger {
+      color: #dc3545 !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Your Uploaded Files</h2>
+    <div class="mb-3">
+      <a href="/<%= category %>/upload" class="btn btn-primary">Upload New File</a>
+      <a href="/logout" class="btn btn-secondary">Logout</a>
+    </div>
+    <ul class="list-group">
+      <% if (files.length === 0) { %>
+        <li class="list-group-item text-danger">No files available</li>
+      <% } else { %>
+        <% files.forEach(function(file) { %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/uploads/<%= file.filename %>" download class="text-white"><%= file.filename %></a>
+            <form action="/<%= category %>/delete/<%= file._id %>?_method=DELETE" method="POST" style="display: inline;">
+              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+          </li>
+        <% }) %>
+      <% } %>
+    </ul>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      const errorMessage = "<%= typeof error !== 'undefined' && error ? error : '' %>";
+      if (errorMessage) {
+        toastr.error(errorMessage, 'Error', {timeOut: 3000});
+      }
+      const successMessage = "<%= typeof success !== 'undefined' && success ? success : '' %>";
+      if (successMessage) {
+        toastr.success(successMessage, 'Success', {timeOut: 3000});
+      }
+    });
+  </script>
+</body>
+</html>
+ -->
+
+
+<!-- 
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Files</title>
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+  <style>
+    body {
+      background: linear-gradient(to right, #d32e91, #00f2fe);
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding-top: 20px;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 700px;
+      margin: auto;
+    }
+    h2 {
+      margin-bottom: 20px;
+      font-weight: 600;
+      text-align: center;
+    }
+    .btn-primary, .btn-secondary, .btn-danger, .btn-info {
+      transition: all 0.3s;
+      margin: 5px;
+    }
+    .btn-primary {
+      background-color: #28a745;
+      border-color: #28a745;
+    }
+    .btn-primary:hover {
+      background-color: #218838;
+      border-color: #1e7e34;
+    }
+    .btn-secondary {
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+    .btn-secondary:hover {
+      background-color: #c82333;
+      border-color: #bd2130;
+    }
+    .btn-info {
+      background-color: #17a2b8;
+      border-color: #17a2b8;
+    }
+    .btn-info:hover {
+      background-color: #138496;
+      border-color: #117a8b;
+    }
+    .card {
+      background-color: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .card .btn-group {
+      display: flex;
+    }
+    .btn-group .btn {
+      margin-left: 5px;
+    }
+    .btn-group .btn-info {
+      margin-left: 10px;
+    }
+    .card .btn-danger {
+      transition: background-color 0.3s;
+    }
+    .card .btn-danger:hover {
+      background-color: #c82333;
+    }
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Your Uploaded Files</h2>
+    <div class="btn-group">
+      <a href="/<%= category %>/upload" class="btn btn-primary">Upload New File</a>
+      <a href="/logout" class="btn btn-secondary">Logout</a>
+    </div>
+    <div>
+      <% if(files.length === 0){ %>
+        <div class="card text-danger">No files available</div>
+      <% } else { %>
+        <% files.forEach(function(file) { %>
+          <div class="card">
+            <a href="/uploads/<%= file.filename %>" class="text-white"><%= file.filename %></a>
+            <div class="btn-group">
+              <a href="/uploads/<%= file.filename %>" class="btn btn-info btn-sm" download>Download</a>
+              <form action="/<%= category %>/delete/<%= file._id %>?_method=DELETE" method="POST" style="margin: 0;">
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+              </form>
+            </div>
+          </div>
+        <% }) %>
+      <% } %>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      const errorMessage = "<%= typeof error !== 'undefined' && error ? error : '' %>";
+      if (errorMessage) {
+        toastr.error(errorMessage, 'Error', {timeOut: 3000});
+      }
+      const successMessage = "<%= typeof success !== 'undefined' && success ? success : '' %>";
+      if (successMessage) {
+        toastr.success(successMessage, 'Success', {timeOut: 3000});
+      }
+    });
+  </script>
+</body>
+</html> -->
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uploaded Files</title>
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+  <style>
+    body {
+      background: linear-gradient(to right, #d32e91, #00f2fe);
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding-top: 20px;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 900px;
+      margin: auto;
+    }
+    h2 {
+      margin-bottom: 20px;
+      font-weight: 600;
+      font-size: 2.5rem;
+      text-align: center;
+      background: linear-gradient(45deg, #ffaad1, #f98948);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .btn-primary, .btn-secondary, .btn-danger, .btn-info {
+      transition: all 0.3s;
+      margin: 5px;
+      padding: 5px 10px;
+      width: auto; /* Adjust button width to be auto */
+    }
+    .btn-primary {
+      background-color: #28a745;
+      border-color: #28a745;
+    }
+    .btn-primary:hover {
+      background-color: #218838;
+      border-color: #1e7e34;
+    }
+    .btn-secondary {
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+    .btn-secondary:hover {
+      background-color: #c82333;
+      border-color: #bd2130;
+    }
+    .btn-info {
+      background-color: #17a2b8;
+      border-color: #17a2b8;
+    }
+    .btn-info:hover {
+      background-color: #138496;
+      border-color: #117a8b;
+    }
+    .card {
+      background-color: rgba(255, 255, 255, 0.3);
+      border: none;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      padding: 15px;
+      transition: transform 0.3s;
+      height: 150px; /* Fixed height */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card:nth-child(odd) {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .card .btn-group {
+      display: flex;
+      align-items: center;
+    }
+    .btn-group .btn {
+      margin-left: 5px;
+      width: 80px; /* Narrower button width */
+    }
+    .btn-group .btn-info {
+      margin-left: 10px;
+    }
+    .btn-group .btn-danger {
+      margin-left: 10px;
+    }
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .row .col-md-6 {
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Uploaded Files</h2>
+    <div class="btn-group">
+      <a href="/<%= category %>/upload" class="btn btn-primary">Upload New File</a>
+      <a href="/logout" class="btn btn-secondary">Logout</a>
+    </div>
+    <div class="row">
+      <% if (files.length === 0) { %>
+        <div class="col-md-12">
+          <div class="card text-danger">No files available</div>
+        </div>
+      <% } else { %>
+        <% files.forEach(function(file) { %>
+          <div class="col-md-6">
+            <div class="card">
+              <a href="/uploads/<%= file.filename %>" class="text-white" target="_blank"><%= file.filename %></a>
+              <div class="btn-group">
+                <a href="/uploads/<%= file.filename %>" class="btn btn-info btn-sm" download>Download</a>
+                <form action="/<%= category %>/delete/<%= file._id %>?_method=DELETE" method="POST" style="margin: 0;">
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      <% } %>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      const errorMessage = "<%= typeof error !== 'undefined' && error ? error : '' %>";
+      if (errorMessage) {
+        toastr.error(errorMessage, 'Error', {timeOut: 3000});
+      }
+      const successMessage = "<%= typeof success !== 'undefined' && success ? success : '' %>";
+      if (successMessage) {
+        toastr.success(successMessage, 'Success', {timeOut: 3000});
+      }
+    });
+  </script>
+</body>
+</html> -->
+
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uploaded Files</title>
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+  <style>
+    body {
+      background: linear-gradient(to right, #d32e91, #00f2fe);
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding-top: 20px;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 900px;
+      margin: auto;
+    }
+    h2 {
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 3rem;
+      text-align: center;
+      background: linear-gradient(45deg, #ffe4e1, #f0e68c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .btn-primary, .btn-secondary, .btn-danger, .btn-info {
+      transition: all 0.3s;
+      margin: 5px;
+      padding: 5px 15px;
+      width: 120px; /* Narrower button width */
+      font-size: 0.9rem;
+    }
+    .btn-primary {
+      background-color: #28a745;
+      border-color: #28a745;
+    }
+    .btn-primary:hover {
+      background-color: #218838;
+      border-color: #1e7e34;
+    }
+    .btn-secondary {
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+    .btn-secondary:hover {
+      background-color: #c82333;
+      border-color: #bd2130;
+    }
+    .btn-info {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+    .btn-info:hover {
+      background-color: #0056b3;
+      border-color: #004085;
+    }
+    .card {
+      background-color: rgba(255, 255, 255, 0.3);
+      border: none;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      padding: 15px;
+      transition: transform 0.3s;
+      height: 150px; /* Fixed height */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card:nth-child(odd) {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .card .btn-group {
+      display: flex;
+      align-items: center;
+      justify-content: center; /* Center align buttons */
+    }
+    .btn-group .btn {
+      margin-left: 5px;
+      width: 90px; /* Narrower button width */
+    }
+    .row .col-md-6 {
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Uploaded Files</h2>
+    <div class="btn-group">
+      <a href="/<%= category %>/upload" class="btn btn-primary">Upload File</a>
+      <a href="/" class="btn btn-info">Home</a>
+      <a href="/logout" class="btn btn-secondary">Logout</a>
+    </div>
+    <div class="row">
+      <% if (files.length === 0) { %>
+        <div class="col-md-12">
+          <div class="card text-danger">No files available</div>
+        </div>
+      <% } else { %>
+        <% files.forEach(function(file) { %>
+          <div class="col-md-6">
+            <div class="card">
+              <a href="/uploads/<%= file.filename %>" class="text-white" target="_blank"><%= file.filename %></a>
+              <div class="btn-group">
+                <a href="/uploads/<%= file.filename %>" class="btn btn-info btn-sm" download>Download</a>
+                <form action="/<%= category %>/delete/<%= file._id %>?_method=DELETE" method="POST" style="margin: 0;">
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      <% } %>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      const errorMessage = "<%= typeof error !== 'undefined' && error ? error : '' %>";
+      if (errorMessage) {
+        toastr.error(errorMessage, 'Error', {timeOut: 3000});
+      }
+      const successMessage = "<%= typeof success !== 'undefined' && success ? success : '' %>";
+      if (successMessage) {
+        toastr.success(successMessage, 'Success', {timeOut: 3000});
+      }
+    });
+  </script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- most modified -->
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uploaded Files</title>
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+  <style>
+    body {
+      background: linear-gradient(to right, #d32e91, #00f2fe);
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding-top: 20px;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 900px;
+      margin: auto;
+    }
+    h2 {
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 3rem;
+      text-align: center;
+      background: linear-gradient(45deg, #ffe4e1, #f0e68c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .btn-group-header {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .btn-primary, .btn-secondary, .btn-danger, .btn-info {
+      transition: all 0.3s;
+      margin: 5px;
+      padding: 5px 15px;
+      width: 120px;
+      font-size: 0.9rem;
+      border-radius: 5px;
+    }
+    .btn-primary {
+      background-color: #28a745;
+      border-color: #28a745;
+    }
+    .btn-primary:hover {
+      background-color: #218838;
+      border-color: #1e7e34;
+    }
+    .btn-secondary {
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+    .btn-secondary:hover {
+      background-color: #c82333;
+      border-color: #bd2130;
+    }
+    .btn-info {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+    .btn-info:hover {
+      background-color: #0056b3;
+      border-color: #004085;
+    }
+    .card {
+      background-color: rgba(255, 255, 255, 0.3);
+      border: none;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      padding: 15px;
+      transition: transform 0.3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      width: 100%; /* Full width within column */
+      max-width: 400px; /* Ensure consistent max width */
+      min-height: 150px; /* Ensure consistent height */
+    }
+    .card:nth-child(odd) {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+    .btn-group .btn {
+      margin: 5px;
+      width: 110px;
+    }
+    .row .col-md-6 {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Uploaded Files</h2>
+    <div class="btn-group-header">
+      <a href="/<%= category %>/upload" class="btn btn-primary">Upload File</a>
+      <a href="/" class="btn btn-info">Home</a>
+      <a href="/logout" class="btn btn-secondary">Logout</a>
+    </div>
+    <div class="row">
+      <% if (files.length === 0) { %>
+        <div class="col-md-12">
+          <div class="card text-danger">No files available</div>
+        </div>
+      <% } else { %>
+        <% files.forEach(function(file) { %>
+          <div class="col-md-6">
+            <div class="card">
+              <a href="/uploads/<%= file.filename %>" class="text-white" target="_blank"><%= file.filename %></a>
+              <div class="btn-group">
+                <a href="/uploads/<%= file.filename %>" class="btn btn-info btn-sm" download>Download</a>
+                <form action="/<%= category %>/delete/<%= file._id %>?_method=DELETE" method="POST" style="margin: 0;">
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      <% } %>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      const errorMessage = "<%= typeof error !== 'undefined' && error ? error : '' %>";
+      if (errorMessage) {
+        toastr.error(errorMessage, 'Error', {timeOut: 3000});
+      }
+      const successMessage = "<%= typeof success !== 'undefined' && success ? success : '' %>";
+      if (successMessage) {
+        toastr.success(successMessage, 'Success', {timeOut: 3000});
+      }
+    });
+  </script>
+</body>
+</html> -->
+
+
+
+
+
+
+<!-- **************** BEST TILL NOW ********************* -->
+
+<!-- 
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uploaded Files</title>
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+  <style>
+    body {
+      background: linear-gradient(to right, #d32e91, #00f2fe);
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding-top: 20px;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 900px;
+      margin: auto;
+    }
+    h2 {
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 3.3rem;
+      text-align: center;
+      background: linear-gradient(45deg, #ffe4e1, #f0e68c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+    }
+    .btn-group-header {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .btn-primary, .btn-secondary, .btn-danger, .btn-info {
+      transition: all 0.3s;
+      margin: 5px;
+      padding: 5px 15px;
+      width: 120px;
+      font-size: 0.9rem;
+      border-radius: 5px;
+    }
+    .btn-primary {
+      background-color: #28a745;
+      border-color: #28a745;
+    }
+    .btn-primary:hover {
+      background-color: #218838;
+      border-color: #1e7e34;
+    }
+    .btn-secondary {
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+    .btn-secondary:hover {
+      background-color: #c82333;
+      border-color: #bd2130;
+    }
+    .btn-info {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+    .btn-info:hover {
+      background-color: #0056b3;
+      border-color: #004085;
+    }
+    .card {
+      background-color: rgba(255, 255, 255, 0.3);
+      border: none;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      padding: 15px;
+      transition: transform 0.3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      width: 100%; /* Full width within column */
+      max-width: 400px; /* Ensure consistent max width */
+      min-height: 150px; /* Ensure consistent height */
+    }
+    .card:nth-child(odd) {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem; /* Increased font size for the title */
+      margin-bottom: 10px;
+    }
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+    .btn-group .btn {
+      margin: 5px;
+      width: 110px;
+      height: 40px; /* Ensures same height for both buttons */
+      border-radius: 5px; /* Ensures same border radius for both buttons */
+    }
+    .row .col-md-6 {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Uploaded Files</h2>
+    <div class="btn-group-header">
+      <a href="/<%= category %>/upload" class="btn btn-primary">Upload File</a>
+      <a href="/" class="btn btn-info">Home</a>
+      <a href="/logout" class="btn btn-secondary">Logout</a>
+    </div>
+    <div class="row">
+      <% if (files.length === 0) { %>
+        <div class="col-md-12">
+          <div class="card text-danger">No files available</div>
+        </div>
+      <% } else { %>
+        <% files.forEach(function(file) { %>
+          <div class="col-md-6">
+            <div class="card">
+              <a href="/uploads/<%= file.filename %>" class="text-white" target="_blank"><%= file.filename %></a>
+              <div class="btn-group">
+                <a href="/uploads/<%= file.filename %>" class="btn btn-info btn-sm" download>Download</a>
+                <form action="/<%= category %>/delete/<%= file._id %>?_method=DELETE" method="POST" style="margin: 0;">
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      <% } %>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      const errorMessage = "<%= typeof error !== 'undefined' && error ? error : '' %>";
+      if (errorMessage) {
+        toastr.error(errorMessage, 'Error', {timeOut: 3000});
+      }
+      const successMessage = "<%= typeof success !== 'undefined' && success ? success : '' %>";
+      if (successMessage) {
+        toastr.success(successMessage, 'Success', {timeOut: 3000});
+      }
+    });
+  </script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+<!-- *******************MOST MODIFIED************** -->
+
+
+
+
+<!-- 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uploaded Files</title>
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+  <style>
+    body {
+      background: linear-gradient(to right, #d32e91, #00f2fe);
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding-top: 20px;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 900px;
+      margin: auto;
+    }
+    h2 {
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 3.3rem;
+      text-align: center;
+      background: linear-gradient(45deg, #ffe4e1, #f0e68c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+    }
+    .btn-group-header {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .btn-primary, .btn-secondary, .btn-danger, .btn-info {
+      transition: all 0.3s;
+      margin: 5px;
+      padding: 5px 15px;
+      width: 120px;
+      font-size: 0.9rem;
+      border-radius: 5px;
+    }
+    .btn-primary {
+      background-color: #28a745;
+      border-color: #28a745;
+    }
+    .btn-primary:hover {
+      background-color: #218838;
+      border-color: #1e7e34;
+    }
+    .btn-secondary {
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+    .btn-secondary:hover {
+      background-color: #c82333;
+      border-color: #bd2130;
+    }
+    .btn-info {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+    .btn-info:hover {
+      background-color: #0056b3;
+      border-color: #004085;
+    }
+    .card {
+      background-color: rgba(255, 255, 255, 0.3);
+      border: none;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      padding: 15px;
+      transition: transform 0.3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      width: 100%; /* Full width within column */
+      max-width: 400px; /* Ensure consistent max width */
+      min-height: 150px; /* Ensure consistent height */
+    }
+    .card:nth-child(odd) {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem; /* Increased font size for the title */
+      margin-bottom: 10px;
+    }
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+    .btn-group .btn {
+      margin: 5px;
+      width: 110px;
+      height: 40px; /* Ensures same height for both buttons */
+      border-radius: 5px; /* Ensures same border radius for both buttons */
+    }
+    .row .col-md-6 {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+    .no-files {
+      text-align: center;
+      color: #f8d7da;
+      font-size: 1.5rem;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Uploaded Files</h2>
+    <div class="btn-group-header">
+      <a href="/<%= category %>/upload" class="btn btn-primary">Upload File</a>
+      <a href="/" class="btn btn-info">Home</a>
+      <a href="/logout" class="btn btn-secondary">Logout</a>
+    </div>
+    <div class="row">
+      <% if (files.length === 0) { %>
+        <div class="col-md-12">
+          <p class="no-files">No files available</p>
+        </div>
+      <% } else { %>
+        <% files.forEach(function(file) { %>
+          <div class="col-md-6">
+            <div class="card">
+              <a href="/uploads/<%= file.filename %>" class="text-white" target="_blank"><%= file.filename %></a>
+              <div class="btn-group">
+                <a href="/uploads/<%= file.filename %>" class="btn btn-info btn-sm" download>Download</a>
+                <form action="/<%= category %>/delete/<%= file._id %>?_method=DELETE" method="POST" style="margin: 0;">
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      <% } %>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      const errorMessage = "<%= typeof error !== 'undefined' && error ? error : '' %>";
+      if (errorMessage) {
+        toastr.error(errorMessage, 'Error', {timeOut: 3000});
+      }
+      const successMessage = "<%= typeof success !== 'undefined' && success ? success : '' %>";
+      if (successMessage) {
+        toastr.success(successMessage, 'Success', {timeOut: 3000});
+      }
+    });
+  </script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uploaded Files</title>
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+  <style>
+    body {
+      background: linear-gradient(to right, #d32e91, #00f2fe);
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding-top: 20px;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 900px;
+      margin: auto;
+    }
+    h2 {
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 3.3rem;
+      text-align: center;
+      background: linear-gradient(45deg, #ffe4e1, #f0e68c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+    }
+    .btn-group-header {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .btn-primary, .btn-secondary, .btn-danger, .btn-info {
+      transition: all 0.3s;
+      margin: 5px;
+      padding: 5px 15px;
+      width: 120px;
+      font-size: 0.9rem;
+      border-radius: 5px;
+    }
+    .btn-primary {
+      background-color: #28a745;
+      border-color: #28a745;
+    }
+    .btn-primary:hover {
+      background-color: #218838;
+      border-color: #1e7e34;
+    }
+    .btn-secondary {
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+    .btn-secondary:hover {
+      background-color: #c82333;
+      border-color: #bd2130;
+    }
+    .btn-info {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+    .btn-info:hover {
+      background-color: #0056b3;
+      border-color: #004085;
+    }
+    .card {
+      background-color: rgba(255, 255, 255, 0.3);
+      border: none;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      padding: 15px;
+      transition: transform 0.3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      width: 100%; /* Full width within column */
+      max-width: 400px; /* Ensure consistent max width */
+      min-height: 150px; /* Ensure consistent height */
+    }
+    .card:nth-child(odd) {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem; /* Increased font size for the title */
+      margin-bottom: 10px;
+    }
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+    .btn-group .btn {
+      margin: 5px;
+      width: 110px;
+      height: 40px; /* Ensures same height for both buttons */
+      border-radius: 5px; /* Ensures same border radius for both buttons */
+    }
+    .row .col-md-6 {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Uploaded Files</h2>
+    <div class="btn-group-header">
+      <a href="/<%= category %>/upload" class="btn btn-primary">Upload File</a>
+      <a href="/" class="btn btn-info">Home</a>
+      <a href="/logout" class="btn btn-secondary">Logout</a>
+    </div>
+    <div class="row">
+      <% if (files.length === 0) { %>
+        <div class="col-md-12">
+          <p class="text-center text-danger">No files available</p>
+        </div>
+      <% } else { %>
+        <% files.forEach(function(file) { %>
+          <div class="col-md-6">
+            <div class="card">
+              <% // Use regex to remove the numeric prefix %>
+              <% const displayName = file.filename.replace(/^\d+-/, ''); %>
+              <a href="/uploads/<%= file.filename %>" class="text-white" target="_blank"><%= displayName %></a>
+              <div class="btn-group">
+                <a href="/uploads/<%= file.filename %>" class="btn btn-info btn-sm" download>Download</a>
+                <form action="/<%= category %>/delete/<%= file._id %>?_method=DELETE" method="POST" style="margin: 0;">
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      <% } %>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      const errorMessage = "<%= typeof error !== 'undefined' && error ? error : '' %>";
+      if (errorMessage) {
+        toastr.error(errorMessage, 'Error', {timeOut: 3000});
+      }
+      const successMessage = "<%= typeof success !== 'undefined' && success ? success : '' %>";
+      if (successMessage) {
+        toastr.success(successMessage, 'Success', {timeOut: 3000});
+      }
+    });
+  </script>
+</body>
+</html>

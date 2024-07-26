@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+  font-family: "Montserrat", sans-serif;
+
+}
+body.login-body {
+    background: linear-gradient(to right, #fc5c7d, #6a82fb);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .login-container {
+    max-width: 400px;
+    width: 100%;
+    background: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .btn-primary {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    background-color: #6a82fb;
+    border-color: #6a82fb;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  .btn-primary:hover {
+    background-color: #5b6bdf;
+    border-color: #5b6bdf;
+  }
+  
+  .link {
+    margin-top: 15px;
+    display: block;
+    color: #6a82fb;
+    text-decoration: none;
+  }
+  
+  .link:hover {
+    color: #5b6bdf;
+    text-decoration: underline;
+  }
+  

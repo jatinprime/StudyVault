@@ -1,0 +1,45 @@
+#include <bits/stdc++.h> 
+/*************************************************************
+    
+    Following is the Binary Tree node structure:
+
+	class BinaryTreeNode {
+		
+	public :
+		int data;
+		BinaryTreeNode* left;
+		BinaryTreeNode* right;
+
+		BinaryTreeNode(int data) {
+		this -> left = NULL;
+		this -> right = NULL;
+		this -> data = data;
+		}
+	};
+
+*************************************************************/
+void inorder(BinaryTreeNode* root , vector<int>& v){
+	if(root == NULL) return ;
+	inorder(root -> left , v);
+	v.push_back(root->data);
+	inorder(root -> right , v);
+}
+void minHeap(BinaryTreeNode* root , vector<int>& v , int& i){
+	if(root == NULL) return ; 
+	root -> data = v[i++];
+	minHeap(root -> left , v , i);
+	minHeap(root -> right , v , i);
+}
+BinaryTreeNode* convertBST(BinaryTreeNode* root)
+{
+	// Write your code here.
+	//already given -> complete binary tree
+	//want to update in preorder manner
+	//find preorder of this root
+	vector<int> v ;
+	inorder(root , v);
+	//want to change value in the structure of bst
+	int i = 0 ; 
+	minHeap(root , v , i);
+	return root ;
+}

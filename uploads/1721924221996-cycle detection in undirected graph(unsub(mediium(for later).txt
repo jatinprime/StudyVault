@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+bool isCycleBfs(int node , unordered_map<int , bool>& visited , unordered_map<int , list<int>>& adjList){
+    unordered_map<int , int> parent ;        //child parent
+    parent[node] = -1 ;
+    visited[node] = true ;
+    queue<int> q ;
+    q.push(node) ;
+    while(!q.empty()){
+        int front = q.front() ;
+        q.pop() ;
+        for(auto neighbour : adjList[front]){
+            if(visited[neighbour] == true && neighbour != parent[front]){
+                return true ;
+            }
+            else if(!visited[neighbour]){
+                visited[neighbour] = true ;
+                parent[neighbour] = front ;
+                q.push(neighbour) ;
+            }
+        }
+    }
+    return false ;
+}
+string cycleDetection (vector<vector<int>>& edges, int n, int m)
+{
+    // Write your code here.
+    unordered_map<int , list<int>> adjList ;
+    for(int i = 0 ; i < m ; i++){
+        int u = edges[i][0] ;
+        int v = edges[i][1] ;
+        adjList[u].push_back(v) ;
+        adjList[v].push_back(u) ;
+    }
+    //travelling for all node as graph can also be disconnected
+    unordered_map<int , bool> visited ;
+    for(int i = 0 ; i < n ; i++){
+        if(!visited[i]){
+            bool iscycle = isCycleBfs(i , visited , adjList) ;
+            if(iscycle) return "Yes" ;
+        }
+    }
+    return "No" ;
+}
